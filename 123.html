@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://d3js.org/d3.v6.js"></script>
+  <style>
+    #container {
+      border: 1px solid gray;
+    }
+  </style>
+</head>
+<body>
+  
+  <h1>123</h1>
+
+  <h3>&#x261f; Input goes here</h3>
+  <input id="data" value="1,2,3"><button onclick="go()">Go</button>
+  <h3>&#x261f; Output goes here</h3>
+  <div id="container"/>
+
+  <script type="application/javascript">
+
+    function go() {
+      const data = document.getElementById('data').value.split(",")
+      render(data)
+    }
+ 
+    function render(data) {
+      const d = d3
+        .select("#container") // Get a reference to the container div below.
+        .selectAll("p") // We are interested in all p's in the container
+        .data(data, d=>d) // Add the data
+        .join(
+          enter => enter.append("p").text(d=>d),
+          update => update,
+          exit => exit.remove()
+        )
+    }    
+    
+  </script>  
+</body>
+</html>
